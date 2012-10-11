@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Starter", "Win32WndC++\Win32WndC++.vcxproj", "{44470E93-B248-4FFF-8256-6E87A9BB8AEC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DiscoDancer", "DiscoDancer\DiscoDancer.vcxproj", "{35E56AE6-60C0-40C3-B057-81649559BA76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44470E93-B248-4FFF-8256-6E87A9BB8AEC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{44470E93-B248-4FFF-8256-6E87A9BB8AEC}.Debug|Win32.Build.0 = Debug|Win32
+		{44470E93-B248-4FFF-8256-6E87A9BB8AEC}.Release|Win32.ActiveCfg = Release|Win32
+		{44470E93-B248-4FFF-8256-6E87A9BB8AEC}.Release|Win32.Build.0 = Release|Win32
+		{35E56AE6-60C0-40C3-B057-81649559BA76}.Debug|Win32.ActiveCfg = Debug|Win32
+		{35E56AE6-60C0-40C3-B057-81649559BA76}.Debug|Win32.Build.0 = Debug|Win32
+		{35E56AE6-60C0-40C3-B057-81649559BA76}.Release|Win32.ActiveCfg = Release|Win32
+		{35E56AE6-60C0-40C3-B057-81649559BA76}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
