@@ -11,11 +11,11 @@ namespace ConsoleSnake
         private int appleX;
         private int appleY;
         private Random rnd;
+        private bool End;
         private const int HEIGHT = 20;
         private const int WIDTH = 40;
-
-
         public Direction Direction { get; set; }
+        public Direction LastDirection { get; set; }
         public Snake(int x, int y)
         {
             segments = new List<Segment>();
@@ -25,19 +25,13 @@ namespace ConsoleSnake
             Console.SetWindowSize(WIDTH, HEIGHT);
             Console.SetBufferSize(WIDTH, HEIGHT);
             SpawnApple();
+            End = false;
         }
         public int Size 
         {
             get
             {
                 return segments.Count;
-            }
-        }
-        public Segment this[int index]
-        {
-            get
-            {
-                return segments[index];
             }
         }
         public void Move()
@@ -62,10 +56,25 @@ namespace ConsoleSnake
                         x = -1;
                     break;
             }
+            if (x == 0 && y == 0)
+            {
+                Direction = LastDirection;
+                return;
+            }
+            if (Size > 1 && segments[0].X + x == segments[1].X && segments[0].Y + y == segments[1].Y)
+            {
+                Direction = LastDirection;
+                return;
+            }
             for (int i = Size - 1; i >= 1; i--)
             {
                 segments[i].X = segments[i - 1].X;
                 segments[i].Y = segments[i - 1].Y;
+            }
+            if (!IsFree(1, segments[0].X + x, segments[0].Y + y))
+            {
+                End = true;
+                return;
             }
             segments[0].X += x;
             segments[0].Y += y;
@@ -74,32 +83,44 @@ namespace ConsoleSnake
                 segments.Add(new Segment(appleX, appleY));
                 SpawnApple();
             }
+            LastDirection = Direction;
         }
         public void Print()
         {
             Console.Clear();
-            for (int i = Size - 1; i >= 0; i--)
+            if (!End)
             {
-                Console.SetCursorPosition(segments[i].X, segments[i].Y);
-                Console.Write((i == 0) ? '@' : '8');
-            }
-            Console.SetCursorPosition(appleX, appleY);
-            Console.Write('*');
-        }
-        private void ClrScr()
-        {
-            for (int i = 1; i < WIDTH - 2; i++)
-                for (int j = 1; j < HEIGHT - 3; j++)
+                for (int i = Size - 1; i >= 0; i--)
                 {
-                    Console.SetCursorPosition(i, j);
-                    Console.Write((char)0);
+                    Console.SetCursorPosition(segments[i].X, segments[i].Y);
+                    Console.Write((i == 0) ? '@' : '8');
                 }
+                Console.SetCursorPosition(appleX, appleY);
+                Console.Write('*');
+            }
+            else if (End)
+            {
+                appleX = 0;
+                appleY = 0;
+                Console.SetCursorPosition(0, 0);
+                Console.WriteLine("Game is over");
+                Console.WriteLine("Your result is : {0}", Size);
+            }
         }
         private bool IsFree(int x, int y)
         {
             foreach (var item in segments)
             {
                 if (x == item.X && y == item.Y)
+                    return false;
+            }
+            return true;
+        }
+        private bool IsFree(int pos, int x, int y)
+        {
+            for (int i = pos; i < Size; i++)
+            {
+                if (segments[i].X == x && segments[i].Y == y)
                     return false;
             }
             return true;

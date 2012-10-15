@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace ConsoleSnake
 {
@@ -12,6 +13,7 @@ namespace ConsoleSnake
             Console.CursorVisible = false;
             Snake snake = new Snake(5, 5);
             snake.Print();
+            Console.ReadKey();
             while (true)
             {
                 var key = Console.ReadKey().Key;
